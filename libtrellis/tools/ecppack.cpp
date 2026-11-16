@@ -232,6 +232,11 @@ help:
             return 1;
         }
         b.write_bit(bit_file);
+        bit_file.close();
+        if (!bit_file) {
+            cerr << "Failed to write output file" << endl;
+            return 1;
+        }
     }
 
     if (vm.count("svf")) {
@@ -337,6 +342,11 @@ help:
             svf_file << "SDR\t32\tTDI  (00000000)" << endl;
             svf_file << "\t\t\tTDO  (00000100)" << endl;
             svf_file << "\t\t\tMASK (00002100);" << endl;
+        }
+        svf_file.close();
+        if (!svf_file) {
+            cerr << "Failed to write output SVF file" << endl;
+            return 1;
         }
     }
 
